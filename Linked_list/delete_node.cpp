@@ -22,6 +22,18 @@ public:
 		current->next = a;
 		return 0;
 	}
+	
+	void delete_node(int passed_data){
+		Node *current = this;
+		if(current->data = passed_data){
+			
+		}
+		while(current->next){
+			current = current->next;
+		}
+
+	}
+
 
 	void display(){
 		Node *current = this;
@@ -38,8 +50,10 @@ int main()
     Node* a = new Node(1);
     a->insert_node(2);
     a->insert_node(3);
-    a->insert_node(4);
+    a->insert_node(2);
     a->insert_node(5);
+	a->display();
+	a->delete_node(2);
 	a->display();
 	return 0;
 }
