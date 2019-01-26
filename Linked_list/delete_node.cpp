@@ -23,17 +23,22 @@ public:
 		return 0;
 	}
 	
-	void delete_node(int passed_data){
+	void delete_node(){
 		Node *current = this;
-		if(current->data = passed_data){
-			
+		current = current->next;
+		while(current != NULL){
+			Node *runner = current; 
+			while(runner->next != NULL){
+				if(current->data == runner->next->data){
+					runner->next = runner->next->next;
+			    }
+				else{
+					runner = runner ->next;
+				}
+			}
+			current = current->next;	
 		}
-		while(current->next){
-			current = current->next;
-		}
-
-	}
-
+	};
 
 	void display(){
 		Node *current = this;
@@ -53,7 +58,7 @@ int main()
     a->insert_node(2);
     a->insert_node(5);
 	a->display();
-	a->delete_node(2);
+	a->delete_node();
 	a->display();
 	return 0;
 }
