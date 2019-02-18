@@ -24,13 +24,14 @@ public:
 	}
 	
 	bool check_loop(){
-		Node *slowptr, *fastptr = this;
+		Node *slowptr = this;
+		Node  *fastptr = this;
 		while(fastptr->next != NULL && fastptr->next->next != NULL){
 			fastptr = fastptr ->next->next;
 			slowptr = slowptr->next; 		
-		}
-		if(fastptr == slowptr){
+			if(fastptr == slowptr){
 			return true;
+		}
 		}
 		return false;
 	}
@@ -53,7 +54,7 @@ int main()
     a->insert_node(3);
     a->insert_node(2);
     a->insert_node(5);
-    a->next= head;
+    // a->next= head;
 	bool result = a->check_loop();
 	cout<< result;
 	return 0;
