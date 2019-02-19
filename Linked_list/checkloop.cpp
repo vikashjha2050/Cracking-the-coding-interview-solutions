@@ -1,5 +1,4 @@
 #include<iostream>
-#include<string>
 using namespace std;
 
 class Node
@@ -13,35 +12,37 @@ public:
 		next = NULL;
 	}
 
-	int insert_node(int passed_data){
+	Node* insert_node(int passed_data){
 		Node *current = this;
 		while(current->next){
 			current = current->next;
 		}
 		Node* a = new Node(passed_data);
 		current->next = a;
-		return 0;
+		return a;
 	}
 	
-	bool check_loop(){
+	Node* check_loop(){
+		Node *head = this;
 		Node *slowptr = this;
 		Node  *fastptr = this;
-		while(fastptr->next != NULL && fastptr->next->next != NULL){
+		while(fastptr && fastptr->next){
 			fastptr = fastptr ->next->next;
 			slowptr = slowptr->next; 		
 			if(fastptr == slowptr){
-			return true;
+				slowptr = head;
+				break;
+			}
 		}
+		if(fastptr == NULL or fastptr->next == NULL)
+		{
+			return NULL;
 		}
-		return false;
-	}
-
-	void display(){
-		Node *current = this;
-		while(current){
-			cout<<current->data;
-			current = current->next;
+		while(slowptr != fastptr){
+			slowptr = slowptr->next;
+			fastptr = fastptr->next;
 		}
+		return slowptr;
 	}
 
 };
@@ -49,13 +50,22 @@ public:
 int main()
 {
     Node* a = new Node(1);
-    Node *head = a;
+    Node* head = a;
     a->insert_node(2);
     a->insert_node(3);
-    a->insert_node(2);
+    Node *b = a->insert_node(4);
     a->insert_node(5);
-    // a->next= head;
-	bool result = a->check_loop();
-	cout<< result;
+    a->insert_node(6);
+    a->insert_node(7);
+    while(a->next){
+    	a= a->next;
+    }
+    a->next = b;
+	Node* result = head->check_loop();
+	if(result == NULL){
+		cout<<"Loop not found";
+	}else{
+		cout<<"Loop found at " << result ->data;    
+	}
 	return 0;
 }
