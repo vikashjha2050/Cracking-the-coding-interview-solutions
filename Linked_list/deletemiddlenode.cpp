@@ -4,23 +4,27 @@ using namespace std;
 
 class Node
 {
-public:
 	int data;
 	class Node* next;
-	
+public:	
 	Node(int passed_data){
 		data = passed_data;
 		next = NULL;
 	}
 
-	int insert_node(int passed_data){
-		Node *current = this;
+	Node* insert_node(int passed_data){
+		Node *current  = this;
+		Node *head = current;
+		Node* a = new Node(passed_data);
+		if(current == NULL){
+			current = a;
+			return  current;
+		}
 		while(current->next){
 			current = current->next;
-		}
-		Node* a = new Node(passed_data);
+		}		
 		current->next = a;
-		return 0;
+		return head;
 	}
 
 	void delete_middle_node(){
@@ -28,8 +32,6 @@ public:
 		Node *fasptr = this;
 		Node *prev = this;
 		while(fasptr->next != NULL && fasptr->next->next != NULL){
-			cout<<slowptr->data;
-			cout<<fasptr->data<<endl;
 			prev = slowptr;
 			slowptr = slowptr->next;			
 			fasptr = fasptr->next->next;			
@@ -50,14 +52,15 @@ public:
 
 int main()
 {
-    Node* a = new Node(1);
-    a->insert_node(2);
-    a->insert_node(3);
-    a->insert_node(4);
-    a->insert_node(5);
-    a->insert_node(6);
-    a->insert_node(7);
-    a->insert_node(8);
+    Node* a = NULL;
+    a = a->insert_node(2);
+    a = a->insert_node(3);
+    a = a->insert_node(4);
+    a = a->insert_node(5);
+    a = a->insert_node(6);
+    a = a->insert_node(7);
+    a = a->insert_node(8);
+    a = a->insert_node(9);
 	a->delete_middle_node();
 	a->display();
 	return 0;
