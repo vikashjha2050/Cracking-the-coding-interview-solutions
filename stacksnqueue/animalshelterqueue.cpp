@@ -39,13 +39,35 @@ public:
 		return a;
 	}
 
-	// Node* dequeue(Node **p){
-	// 	Node *current = *p;
-	// 	Node *head = *p;
-	// 	current = current -> next ;
-	// 	*p = current;
-	// 	return head;
-	// }
+	Node* dequeudog(animal **dog1){
+		animal *dog = *dog1;
+		if(dog->front ){
+			Node *dequequedog = dog->front;
+			dog->front = dog->front->next;
+			return dequequedog;
+		}
+	}
+
+	Node* dequeucat(animal **cat1){
+		animal *cat = *cat1;
+		if(cat->front ){
+			Node *dequequecat = cat->front;
+			cat->front = cat->front->next;
+			return dequequecat;
+		}
+	}
+	
+	Node* dequeueany(animal **dog1, animal **cat1){
+		animal *dog = *dog1;
+		animal *cat = *cat1;
+		if(dog->front->order < cat->front->order){
+			Node *dequequedog = dog->dequeudog(&dog);
+			return dequequedog;
+		}else{
+			Node *dequequecat = cat->dequeucat(&cat);
+			return dequequecat;
+		}
+	}
 
 	void display(){
 		animal *current = this;
@@ -53,7 +75,6 @@ public:
 			cout << current->front->name << "-" << current->front->order<<endl;
 			current->front = current->front->next;
 		}
-		cout<<endl;
 	}
 };
 
@@ -61,12 +82,15 @@ int main()
 {
     animal *dog = new animal();
     animal *cat = new animal();
-    dog = dog->enqueue(1);
-    dog = dog->enqueue(2);
-    dog = dog->enqueue(3);
-    cat = cat->enqueue(4);
-    cat = cat->enqueue(5);
-    cat = cat->enqueue(6);
+    // dog = dog->enqueue(1);
+    // dog = dog->enqueue(2);
+    // dog = dog->enqueue(3);
+    // cat = cat->enqueue(4);
+    // cat = cat->enqueue(5);
+    // cat = cat->enqueue(6);
+    // Node *dequeuedog = dog->dequeudog(&dog);
+    // Node *dequequecat = cat->dequeucat(&cat);
+    Node *dequeued = dog->dequeueany(&dog,&cat);
     dog->display();
     cat->display();
 	return 0;
