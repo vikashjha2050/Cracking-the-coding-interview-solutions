@@ -60,7 +60,14 @@ public:
 	Node* dequeueany(animal **dog1, animal **cat1){
 		animal *dog = *dog1;
 		animal *cat = *cat1;
-		if(dog->front->order < cat->front->order){
+		if(dog ->front == NULL){
+			Node *dequequecat = cat->dequeucat(&cat);
+			return dequequecat;
+		}else if(cat ->front == NULL ){
+			Node *dequequedog = dog->dequeudog(&dog);
+			return dequequedog;
+		}
+		else if(dog->front->order < cat->front->order){
 			Node *dequequedog = dog->dequeudog(&dog);
 			return dequequedog;
 		}else{
@@ -89,8 +96,8 @@ int main()
     // cat = cat->enqueue(5);
     // cat = cat->enqueue(6);
     // Node *dequeuedog = dog->dequeudog(&dog);
-    // Node *dequequecat = cat->dequeucat(&cat);
-    Node *dequeued = dog->dequeueany(&dog,&cat);
+    Node *dequequecat = cat->dequeucat(&cat);
+    // Node *dequeued = dog->dequeueany(&dog,&cat);
     dog->display();
     cat->display();
 	return 0;
